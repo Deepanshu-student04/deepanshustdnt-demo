@@ -1,3 +1,3 @@
 # deepanshustdnt-demo
 This is my first repository 
-Author - Deepanshu Tiwari
+Author - Deepanshu (deepanshu student )
