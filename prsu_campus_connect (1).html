@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PRSU Campus Connect | Rajju Bhaiya University</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --green:#146340;
+  --green2:#1f8253;
+  --green-dark:#0d422a;
+  --lime:#d8ef9a;
+  --ink:#13221b;
+  --muted:#5f6f67;
+  --bg:#f3f7f2;
+  --card:#ffffff;
+  --line:#e1ebe2;
+  --shadow:0 12px 32px rgba(20,65,42,.06);
+  --shadow-hover:0 18px 40px rgba(20,65,42,.12);
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:radial-gradient(circle at top right,#e9f4ea 0%,var(--bg) 42%);
+  color:var(--ink);
+  font:15px/1.6 'Inter',system-ui,-apple-system,Segoe UI,Arial,sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,.brand b,.stat b,.portal-card strong{font-family:'Plus Jakarta Sans','Inter',sans-serif}
+button,input,select,textarea{font:inherit}
+button,a{cursor:pointer}
+a{color:inherit;text-decoration:none}
+
+/* Top announcement bar */
+.topbar{
+  background:linear-gradient(90deg,#0c3f2a,#145b3d);
+  color:#eaf6ee;
+  padding:9px 5vw;
+  font-size:12px;
+  font-weight:500;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  flex-wrap:wrap;
+  border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+/* Sticky frosted navigation */
+header{
+  background:rgba(255,255,255,.92);
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--line);
+  position:sticky;
+  top:0;
+  z-index:20;
+  box-shadow:0 4px 20px rgba(16,63,45,.04);
+}
+.nav{max-width:1200px;margin:auto;padding:13px 22px;display:flex;align-items:center;justify-content:space-between;gap:18px}
+.brand{display:flex;align-items:center;gap:13px;transition:transform .2s ease}
+.brand:hover{transform:translateY(-1px)}
+.crest{width:50px;height:50px;border-radius:50%;display:block;border:2px solid #e4efe5;box-shadow:0 4px 12px rgba(23,107,69,.1)}
+.brand b{display:block;font-size:16px;font-weight:800;letter-spacing:-.2px;line-height:1.2;color:#0f291e}
+.brand small{color:var(--muted);font-size:11.5px;font-weight:500}
+
+.navlinks{display:flex;gap:8px;align-items:center;font-size:13.5px;font-weight:600;color:#3c4e44}
+.navlinks a{padding:8px 13px;border-radius:10px;transition:all .2s ease}
+.navlinks a:hover{color:var(--green);background:#edf6ee}
+
+/* Buttons */
+.btn{
+  border:0;
+  border-radius:12px;
+  padding:11px 18px;
+  background:linear-gradient(135deg,var(--green2),var(--green));
+  color:#fff;
+  font-weight:700;
+  font-size:13px;
+  letter-spacing:.1px;
+  box-shadow:0 6px 16px rgba(23,107,69,.22);
+  transition:all .22s ease;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:6px;
+}
+.btn:hover{transform:translateY(-2px);box-shadow:0 10px 22px rgba(23,107,69,.3);background:linear-gradient(135deg,#24915d,#115838)}
+.btn:active{transform:translateY(0)}
+.btn.light{background:#eaf4e9;color:var(--green);box-shadow:none;border:1px solid #d5e7d6}
+.btn.light:hover{background:#dcefdc;transform:translateY(-1px)}
+.btn.outline{background:#fff;color:var(--green);border:1px solid #cfe0d1;box-shadow:none}
+
+main{max-width:1200px;margin:auto;padding:28px 22px 64px}
+
+/* Hero Banner */
+.hero{
+  background:linear-gradient(120deg,#0f4730 0%,#1a7348 62%,#7eb356 100%);
+  border-radius:28px;
+  padding:40px 38px;
+  color:#fff;
+  display:grid;
+  grid-template-columns:1.28fr .72fr;
+  gap:28px;
+  align-items:center;
+  overflow:hidden;
+  position:relative;
+  box-shadow:0 20px 45px rgba(16,77,52,.18);
+  border:1px solid rgba(255,255,255,.15);
+}
+.hero:before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background-image:radial-gradient(rgba(255,255,255,.12) 1px,transparent 1px);
+  background-size:22px 22px;
+  pointer-events:none;
+}
+.hero:after{
+  content:"";
+  position:absolute;
+  width:320px;
+  height:320px;
+  border:1px solid #ffffff28;
+  border-radius:50%;
+  right:-75px;
+  top:-95px;
+  box-shadow:0 0 0 38px #ffffff0a,0 0 0 78px #ffffff08;
+  pointer-events:none;
+}
+.eyebrow{
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+  background:rgba(255,255,255,.14);
+  border:1px solid rgba(255,255,255,.22);
+  padding:5px 12px;
+  border-radius:99px;
+  font-size:11px;
+  letter-spacing:1.3px;
+  text-transform:uppercase;
+  color:#e2f6bd;
+  font-weight:800;
+}
+.eyebrow:before{content:"";width:7px;height:7px;border-radius:50%;background:#bef264;box-shadow:0 0 8px #bef264}
+h1{font-size:clamp(30px,4.2vw,46px);font-weight:800;letter-spacing:-.8px;line-height:1.1;margin:14px 0}
+.hero p{max-width:580px;color:#e6f3ea;font-size:15.5px;line-height:1.6;margin:0 0 24px}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;position:relative;z-index:2}
+.hero .btn{background:#e4f5b5;color:#12442c;box-shadow:0 8px 20px rgba(0,0,0,.16)}
+.hero .btn:hover{background:#eefac8}
+.hero .btn.light{background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.38);backdrop-filter:blur(6px)}
+.hero .btn.light:hover{background:rgba(255,255,255,.24)}
+
+.hero-visual{display:flex;align-items:center;justify-content:center;position:relative;z-index:2}
+.portal-card{
+  width:min(100%,310px);
+  background:#fff;
+  border-radius:20px;
+  padding:9px;
+  box-shadow:0 18px 36px rgba(10,42,27,.28);
+  transition:transform .3s ease;
+}
+.portal-card:hover{transform:translateY(-4px) scale(1.01)}
+
+/* Section Headings */
+.section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin:36px 0 16px}
+.section-head h2{font-size:22px;font-weight:800;letter-spacing:-.3px;margin:0;color:#10281d}
+.section-head p{color:var(--muted);font-size:13px;margin:4px 0 0}
+
+/* Stats Strip */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:15px;margin-top:22px}
+.stat,.card{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:19px;
+  box-shadow:var(--shadow);
+  transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease;
+}
+.stat:hover{transform:translateY(-3px);box-shadow:var(--shadow-hover);border-color:#c6dec9}
+.stat{display:flex;gap:14px;align-items:center}
+.stat-icon{
+  width:46px;
+  height:46px;
+  border-radius:14px;
+  background:linear-gradient(135deg,#edf7ea,#d9eed6);
+  border:1px solid #cde4cc;
+  display:grid;
+  place-items:center;
+  font-size:21px;
+  flex-shrink:0;
+}
+.stat b{font-size:21px;font-weight:800;color:#102b1f;display:block;line-height:1.2}
+.stat small{color:var(--muted);font-size:11.5px;font-weight:500}
+
+/* Services Grid */
+.grid{display:grid;grid-template-columns:1.25fr .75fr;gap:18px}
+.services{display:grid;grid-template-columns:repeat(4,1fr);gap:13px}
+.service{
+  border:1px solid var(--line);
+  background:#fff;
+  border-radius:17px;
+  padding:20px 12px;
+  text-align:center;
+  box-shadow:0 6px 18px rgba(24,65,43,.04);
+  transition:all .24s cubic-bezier(.2,.8,.2,1);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+}
+.service:hover{
+  transform:translateY(-4px);
+  border-color:#8ec29b;
+  box-shadow:0 14px 28px rgba(23,107,69,.12);
+  background:linear-gradient(180deg,#ffffff 0%,#f6fbf6 100%);
+}
+.service span{
+  width:48px;
+  height:48px;
+  border-radius:14px;
+  background:#eef7ed;
+  display:grid;
+  place-items:center;
+  font-size:23px;
+  margin:0 auto 10px;
+  transition:transform .24s ease,background .24s ease;
+}
+.service:hover span{transform:scale(1.08);background:#dff1de}
+.service b{font-size:13px;font-weight:700;color:#142c21}
+.service small{display:block;color:var(--muted);font-size:11px;margin-top:4px;font-weight:500}
+
+/* Notice Board & Map */
+.notice{display:flex;gap:14px;padding:15px 6px;border-bottom:1px solid var(--line);border-radius:10px;transition:background .2s ease}
+.notice:hover{background:#f8fbf8}
+.notice:last-child{border:0}
+.date{
+  min-width:52px;
+  height:52px;
+  border-radius:14px;
+  background:linear-gradient(135deg,#eaf5e7,#d6ebd4);
+  border:1px solid #c6e0c5;
+  color:var(--green);
+  display:grid;
+  place-items:center;
+  text-align:center;
+  font-weight:800;
+  font-size:12px;
+  letter-spacing:.3px;
+}
+.notice b{font-size:14px;color:#132a20;display:block}
+.notice small{color:var(--muted);font-size:12px;line-height:1.45;display:block;margin-top:2px}
+.tag{display:inline-block;background:#fef5dc;border:1px solid #f5e1a4;color:#855b14;padding:3px 9px;border-radius:7px;font-size:10px;font-weight:700;margin-top:7px}
+
+.mapframe{width:100%;height:310px;border:0;border-radius:15px;background:#e7eee7}
+.map-note{font-size:11.5px;color:var(--muted);margin:10px 4px 2px;line-height:1.45}
+
+/* News & Updates Cards */
+.news-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.news{padding:0;overflow:hidden;display:flex;flex-direction:column}
+.news:hover{transform:translateY(-4px);box-shadow:var(--shadow-hover);border-color:#c6dec9}
+.news-art{height:125px;background:linear-gradient(135deg,#d9edcf,#a6c99c);display:grid;place-items:center;font-size:38px;border-bottom:1px solid var(--line);overflow:hidden}
+.news-art img{transition:transform .35s ease}
+.news:hover .news-art img{transform:scale(1.04)}
+.news-body{padding:18px;flex:1;display:flex;flex-direction:column}
+.news-body small{color:var(--green);font-weight:800;font-size:10.5px;letter-spacing:.6px}
+.news-body b{display:block;margin:6px 0;font-size:15px;color:#11291e}
+.news-body p{font-size:12px;color:var(--muted);margin:0 0 12px;line-height:1.5;flex:1}
+.news-body a.muted{font-weight:700;color:var(--green);font-size:12px;display:inline-flex;align-items:center;gap:4px}
+.news-body a.muted:hover{text-decoration:underline}
+
+/* Interactive Panels (QR, Complaint & Admin) */
+.panel{
+  display:none;
+  background:#fff;
+  border:1px solid #cce0ce;
+  border-radius:22px;
+  padding:26px;
+  margin-top:26px;
+  box-shadow:0 18px 42px rgba(20,65,42,.1);
+  animation:panelFade .28s ease;
+}
+@keyframes panelFade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.panel.active{display:block}
+.panel h2{margin:0 0 5px;font-size:20px;color:#10281d}
+.muted{color:var(--muted);font-size:12.5px}
+
+.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px}
+.field label{display:block;font-size:11.5px;font-weight:700;color:#273b31;margin-bottom:6px}
+.field input,.field select,.field textarea{
+  width:100%;
+  border:1px solid #d5e3d6;
+  border-radius:11px;
+  padding:11px 13px;
+  background:#fafcfa;
+  transition:border-color .2s ease,box-shadow .2s ease,background .2s ease;
+}
+.field input:focus,.field select:focus,.field textarea:focus{
+  outline:none;
+  border-color:var(--green2);
+  background:#fff;
+  box-shadow:0 0 0 3.5px rgba(35,134,83,.14);
+}
+.field.full{grid-column:1/-1}
+.field textarea{min-height:95px;resize:vertical}
+
+.qrbox{
+  max-width:430px;
+  margin:20px auto;
+  text-align:center;
+  padding:30px 26px;
+  border:1.5px dashed #8eb897;
+  border-radius:20px;
+  background:linear-gradient(180deg,#f7fbf6 0%,#eef7ed 100%);
+}
+.qrvisual{
+  width:152px;
+  height:152px;
+  margin:0 auto 16px;
+  background:#fff;
+  border-radius:18px;
+  border:8px solid #fff;
+  box-shadow:0 8px 22px rgba(23,77,53,.1),0 0 0 1px #d7e6d8;
+  display:grid;
+  place-items:center;
+  font-size:70px;
+  color:#174d35;
+}
+.result{
+  padding:13px 15px;
+  border-radius:12px;
+  background:#e9f7e8;
+  border:1px solid #bfe3be;
+  color:#145334;
+  margin-top:14px;
+  font-size:12.5px;
+  font-weight:500;
+  display:none;
+}
+
+/* Footer */
+footer{
+  background:linear-gradient(180deg,#114330 0%,#0b3122 100%);
+  color:#e4f1e7;
+  padding:32px 5vw;
+  text-align:center;
+  font-size:12px;
+  border-top:1px solid rgba(255,255,255,.08);
+}
+footer b{font-size:14px;letter-spacing:.2px;color:#fff}
+footer p{margin:6px 0 10px;color:#bdd5c4}
+footer a{color:#d8ef9a;font-weight:600;text-decoration:underline}
+
+.mobilemenu{display:none}
+@media(max-width:800px){
+  .navlinks{display:none}
+  .mobilemenu{display:block}
+  .hero{grid-template-columns:1fr;padding:28px 24px}
+  .hero-visual{display:none}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .grid{grid-template-columns:1fr}
+  .services{grid-template-columns:repeat(2,1fr)}
+  .news-grid{grid-template-columns:1fr}
+  .formgrid{grid-template-columns:1fr}
+  .field.full{grid-column:auto}
+}
+</style>
+</head>
+<body>
+<div class="topbar"><span>प्रो. राजेन्द्र सिंह (रज्जू भैया) विश्वविद्यालय, प्रयागराज</span><span>Student-first • One digital campus</span></div>
+<header><nav class="nav">
+ <a class="brand" href="#home"><img class="crest" src="https://prsuniv.ac.in/images/Allaha_logo.png" alt="Official PRSU university emblem" style="object-fit:contain;background:#fff;padding:2px"><div><b>PRSU Campus Connect</b><small>Prof. Rajendra Singh (Rajju Bhaiya) University</small></div></a>
+ <div class="navlinks"><a href="#services">Services</a><a href="#notices">Notices</a><a href="#campus">Campus Map</a><a href="#news">Updates</a></div>
+ <div style="display:flex;gap:8px;align-items:center">
+  <button class="btn light" onclick="showPanel('admin')">🛡️ Admin Corner</button>
+  <button class="btn" onclick="showPanel('complaint')">Report a Problem</button>
+  <button class="mobilemenu btn light" onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})">Menu</button>
+ </div>
+</nav></header>
+<main id="home">
+<section class="hero">
+ <div style="position:relative;z-index:2"><div class="eyebrow">Your university, connected</div><h1>Welcome to your<br>digital campus.</h1><p>Find student services, explore campus information, follow university updates and report campus issues — all in one place.</p><div class="hero-actions"><a class="btn" href="#services">Explore Services →</a><button class="btn light" onclick="showPanel('qr')">▦ Try QR Scanner</button></div></div>
+ <div class="hero-visual"><div class="portal-card" style="width:100%;padding:8px;background:#fff;border:0;transform:none"><img src="https://www.prsuniv.ac.in/Banner/prsuuniversity.jpeg" alt="Official PRSU university campus banner" style="width:100%;display:block;border-radius:14px"><small style="display:block;color:#174b32;font-weight:600;font-size:11px;padding:8px 6px 3px">Official university banner · prsuniv.ac.in</small></div></div>
+</section>
+<div class="stats">
+ <div class="stat"><div class="stat-icon">🏛️</div><div><b>9+</b><small>Faculties (official site)</small></div></div>
+ <div class="stat"><div class="stat-icon">📚</div><div><b>35+</b><small>Departments of higher learning</small></div></div>
+ <div class="stat"><div class="stat-icon">🎓</div><div><b>56+</b><small>Study programmes</small></div></div>
+ <div class="stat"><div class="stat-icon">📍</div><div><b>5.25 lakh+</b><small>Affiliated-college students*</small></div></div>
+</div>
+<div class="section-head" id="services"><div><h2>Student services</h2><p>Quick access to commonly used campus services</p></div><span class="muted">Choose a service</span></div>
+<div class="services">
+ <a class="service" href="https://www.prsuniv.ac.in/" target="_blank"><span>📢</span><b>University Website</b><small>Official information ↗</small></a>
+ <a class="service" href="https://www.prsuniv.ac.in/" target="_blank"><span>📝</span><b>Admissions</b><small>Notices & process ↗</small></a>
+ <a class="service" href="https://mresult.prsuprayagraj.in/" target="_blank"><span>📊</span><b>Results & Exams</b><small>Official portal ↗</small></a>
+ <button class="service" onclick="showPanel('qr')"><span>▦</span><b>QR Campus Scan</b><small>Try demo scanner</small></button>
+ <button class="service" onclick="showPanel('complaint')"><span>🛠️</span><b>Campus Complaint</b><small>Report an issue</small></button>
+ <a class="service" href="#campus"><span>🗺️</span><b>Campus Map</b><small>Find the campus</small></a>
+ <a class="service" href="https://www.prsuniv.ac.in/Prsu-Departments.aspx?DPTid=F1" target="_blank"><span>📚</span><b>Departments</b><small>Official department list ↗</small></a>
+ <a class="service" href="#news"><span>📰</span><b>News & Updates</b><small>Campus highlights</small></a>
+</div>
+<div class="grid">
+ <section id="notices"><div class="section-head"><div><h2>Notice board</h2><p>Check official university announcements</p></div></div><div class="card" id="noticeBoardCard">
+  <div class="notice"><div class="date">PRSU</div><div><b>Examination notices</b><small>Check the official university website for current schedules and updates.</small><span class="tag">Official link</span></div></div>
+  <div class="notice"><div class="date">PRSU</div><div><b>Admission announcements</b><small>Refer to official admission notifications for dates and eligibility.</small><span class="tag">Official link</span></div></div>
+  <div class="notice"><div class="date">PRSU</div><div><b>Academic calendar & holidays</b><small>Use the latest university-issued calendar; dates may change.</small><span class="tag">Official link</span></div></div>
+  <a class="btn light" id="noticeMoreLink" style="display:inline-flex;margin-top:12px" href="https://www.prsuniv.ac.in/" target="_blank">Open official notices ↗</a>
+ </div></section>
+ <section id="campus"><div class="section-head"><div><h2>Find the university</h2><p>PRSU main campus · Naini, Prayagraj</p></div></div><div class="card" style="padding:12px">
+  <div style="position:relative;border-radius:15px;overflow:hidden;border:1px solid #d5e3d6;background:#e7eee7">
+   <iframe class="mapframe" loading="lazy" src="https://www.openstreetmap.org/export/embed.html?bbox=81.8780%2C25.3240%2C81.9110%2C25.3480&layer=mapnik&marker=25.3358%2C81.8943" title="PRSU Naini Campus Map"></iframe>
+   <div style="position:absolute;bottom:10px;left:10px;right:10px;background:rgba(255,255,255,.94);backdrop-filter:blur(6px);padding:9px 12px;border-radius:11px;border:1px solid #d5e3d6;display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:11.5px">
+    <div><strong style="color:#10281d;display:block">📍 PRSU Main Campus, Naini</strong><span style="color:var(--muted)">Mirzapur Road, Prayagraj (25.3358° N, 81.8943° E)</span></div>
+   </div>
+  </div>
+  <p class="map-note">Map search uses the university's published address: Mirzapur Road, Naini, Prayagraj, U.P. 211010.</p>
+  <a class="btn light" style="display:inline-flex;margin:10px 4px 2px" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Prof.+Rajendra+Singh+(Rajju+Bhaiya)+University,+Mirzapur+Road,+Naini,+Prayagraj,+Uttar+Pradesh+211010">Open directions ↗</a>
+ </div></section>
+</div>
+<div class="section-head" id="news"><div><h2>University updates</h2><p>Useful places to check for verified information</p></div></div>
+<div class="news-grid">
+ <article class="card news"><div class="news-art" style="background:#fff;padding:0"><img src="https://www.prsuniv.ac.in/Banner/prsuuniversity.jpeg" alt="Official PRSU campus" style="width:100%;height:125px;object-fit:cover"></div><div class="news-body"><small>OFFICIAL UNIVERSITY</small><b>PRSU News & Events</b><p>Open the university's own news, UTD notices, college circulars and event updates.</p><a class="muted" href="https://www.prsuniv.ac.in/" target="_blank">Open official PRSU site ↗</a></div></article>
+ <article class="card news"><div class="news-art" style="background:#fafcfa;padding:12px"><img src="https://prsuniv.ac.in/images/Allaha_logo.png" alt="Official PRSU emblem" style="height:100px;max-width:100%;object-fit:contain"></div><div class="news-body"><small>OFFICIAL GALLERY</small><b>University photo gallery</b><p>See PRSU's own campus, infrastructure, facilities, laboratories and convocation photographs.</p><a class="muted" href="https://www.prsuniv.ac.in/Image_Gallery.aspx" target="_blank">Open official gallery ↗</a></div></article>
+ <article class="card news"><div class="news-art" style="background:linear-gradient(135deg,#eaf5e8,#d5ebd3);color:#146340;font-size:18px;font-weight:800;letter-spacing:.5px">PRSU · STUDENTS</div><div class="news-body"><small>STUDENT SERVICES</small><b>Online services for students</b><p>Access official student services such as certificates, migration and marksheet-related requests.</p><a class="muted" href="https://prsuniv.ac.in/StudentsCorner2.aspx" target="_blank">Open student services ↗</a></div></article>
+</div>
+<section class="panel" id="qr"><h2>Campus QR scanner</h2><p class="muted">Hackathon demo: select a sample campus QR to preview how location information could appear. This prototype does not access your camera.</p><div class="qrbox"><div class="qrvisual">▦</div><b>PRSU Campus QR Demo</b><p class="muted">Choose a sample code below</p><select id="qrselect" class="field" style="padding:11px;border:1px solid #d5e3d6;border-radius:10px;width:100%;margin:10px 0 12px;background:#fff"><option value="">Select a location</option><option>Computer Lab</option><option>Central Library</option><option>Administrative Block</option><option>Department Office</option></select><button class="btn" style="width:100%" onclick="scanDemo()">Open location details</button><div class="result" id="qrresult"></div></div></section>
+<section class="panel" id="complaint"><h2>Report a campus issue</h2><p class="muted">Demonstration form only. Submissions are shown on this page and are not sent to the university.</p><form id="complaintForm" class="formgrid">
+ <div class="field"><label>Your name</label><input required placeholder="Enter your name"></div>
+ <div class="field"><label>Student email (optional)</label><input type="email" placeholder="name@example.com"></div>
+ <div class="field"><label>Issue location</label><select required><option value="">Select location</option><option>Classroom</option><option>Computer Lab</option><option>Library</option><option>Washroom</option><option>Campus grounds</option><option>Other</option></select></div>
+ <div class="field"><label>Issue category</label><select required><option value="">Select category</option><option>Electricity</option><option>Internet / Wi-Fi</option><option>Water / Plumbing</option><option>Equipment</option><option>Cleanliness</option><option>Other</option></select></div>
+ <div class="field full"><label>Describe the issue</label><textarea required placeholder="Tell us what needs attention..."></textarea></div>
+ <div class="field full"><button class="btn" type="submit">Submit demo complaint</button></div>
+ </form><div class="result" id="complaintresult"></div></section>
+
+<!-- Admin Corner Panel -->
+<section class="panel" id="admin">
+  <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:14px">
+    <div>
+      <h2>🛡️ Admin Corner</h2>
+      <p class="muted">Campus administrator desk: manage reported issues and publish instant notices.</p>
+    </div>
+    <span class="tag" style="background:#e9f7e8;border-color:#bfe3be;color:#145334;font-size:11px">PRSU Admin Demo</span>
+  </div>
+
+  <!-- Admin Login Gate -->
+  <div id="adminLoginBox" style="max-width:400px;margin:12px auto;padding:20px;border:1px solid #d5e3d6;border-radius:16px;background:#fafcfa">
+    <b style="display:block;margin-bottom:4px;font-size:14px">Admin Verification</b>
+    <p class="muted" style="margin:0 0 12px">Authorized personnel only.</p>
+    <div class="field" style="margin-bottom:10px">
+      <input type="password" id="adminPassInput" placeholder="Password" onkeydown="if(event.key==='Enter')unlockAdmin()">
+    </div>
+    <button class="btn" style="width:100%" onclick="unlockAdmin()">Unlock Admin Corner</button>
+    <div class="result" id="adminLoginMsg"></div>
+  </div>
+
+  <!-- Admin Workspace (Hidden until unlocked) -->
+  <div id="adminWorkspace" style="display:none">
+    <div class="grid" style="grid-template-columns:1fr 1fr;gap:18px;margin-top:10px">
+      <!-- Manage Campus Complaints -->
+      <div class="card" style="box-shadow:none;background:#fafcfa">
+        <b style="font-size:15px;display:block;margin-bottom:4px">📋 Reported Campus Issues</b>
+        <p class="muted" style="margin:0 0 12px">Review and mark student-reported issues as resolved.</p>
+        <div id="adminComplaintList" style="display:flex;flex-direction:column;gap:10px"></div>
+      </div>
+
+      <!-- Publish New Notice -->
+      <div class="card" style="box-shadow:none;background:#fafcfa">
+        <b style="font-size:15px;display:block;margin-bottom:4px">📢 Post Notice to Board</b>
+        <p class="muted" style="margin:0 0 12px">Add an announcement directly to the main Notice Board.</p>
+        <form id="adminNoticeForm" style="display:flex;flex-direction:column;gap:10px">
+          <div class="field"><label>Notice Title</label><input id="adminNoticeTitle" required placeholder="e.g., Campus Cleanliness Drive"></div>
+          <div class="field"><label>Notice Details</label><textarea id="adminNoticeDesc" required style="min-height:72px" placeholder="Enter notice details..."></textarea></div>
+          <button class="btn" type="submit">Publish Notice</button>
+        </form>
+        <div class="result" id="adminNoticeResult"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div style="text-align:center;margin:34px 0 0;color:var(--muted);font-size:11px;line-height:1.5">University emblem, campus banner and linked information are sourced from PRSU's official website. Figures shown are reproduced from its public homepage and may change. This remains an independent student prototype, not an official university portal.</div>
+</main>
+<footer><b>PRSU Campus Connect</b><p>Independent student prototype using official PRSU public information and imagery · Not an official university portal</p><a href="https://www.prsuniv.ac.in/" target="_blank">Official PRSU website</a></footer>
+<script>
+const adminComplaints=[
+  {id:'PRSU-DEMO-4821',name:'Aarav Sharma',location:'Computer Lab',category:'Internet / Wi-Fi',desc:'Wi-Fi router disconnecting frequently in Lab 2.',status:'Pending'},
+  {id:'PRSU-DEMO-3194',name:'Priya Verma',location:'Library',category:'Electricity',desc:'Two reading lamps not working in the quiet hall.',status:'Pending'}
+];
+
+function renderAdminComplaints(){
+  const list=document.getElementById('adminComplaintList');
+  if(!list)return;
+  if(!adminComplaints.length){
+    list.innerHTML='<p class="muted">No complaints submitted yet.</p>';
+    return;
+  }
+  list.innerHTML=adminComplaints.map((c,i)=>`
+    <div style="background:#fff;border:1px solid #dce6dc;border-radius:12px;padding:12px;font-size:12px">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:6px;margin-bottom:4px">
+        <strong style="color:#10281d">${c.id} • ${c.location}</strong>
+        <span class="tag" style="margin:0;${c.status==='Resolved'?'background:#e9f7e8;border-color:#bfe3be;color:#145334':''}">${c.status}</span>
+      </div>
+      <div style="color:#3c4e44;margin-bottom:6px">${c.category}: ${c.desc}</div>
+      <div style="display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:11px">
+        <span>By: ${c.name}</span>
+        ${c.status==='Pending'?`<button class="btn light" style="padding:5px 10px;font-size:11px" onclick="resolveComplaint(${i})">Mark Resolved ✓</button>`:'<span>✓ Action completed</span>'}
+      </div>
+    </div>
+  `).join('');
+}
+
+function unlockAdmin(){
+  const pass=document.getElementById('adminPassInput').value.trim();
+  const msg=document.getElementById('adminLoginMsg');
+  if(pass==='PRSU234509'){
+    document.getElementById('adminLoginBox').style.display='none';
+    document.getElementById('adminWorkspace').style.display='block';
+    renderAdminComplaints();
+  }else{
+    msg.style.display='block';
+    msg.style.background='#fee2e2';
+    msg.style.borderColor='#fca5a5';
+    msg.style.color='#991b1b';
+    msg.textContent='Incorrect password. Please try again.';
+  }
+}
+
+function resolveComplaint(idx){
+  adminComplaints[idx].status='Resolved';
+  renderAdminComplaints();
+}
+
+function showPanel(id){document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));let el=document.getElementById(id);el.classList.add('active');el.scrollIntoView({behavior:'smooth',block:'start'})}
+function scanDemo(){let v=document.getElementById('qrselect').value;let r=document.getElementById('qrresult');if(!v){r.style.display='block';r.textContent='Please select a sample location first.';return}let details={'Computer Lab':'Sample location: Computer Lab. Facilities and equipment information would appear here.','Central Library':'Sample location: Central Library. Library timings and services would appear here.','Administrative Block':'Sample location: Administrative Block. Office and help-desk information would appear here.','Department Office':'Sample location: Department Office. Department contact and office hours would appear here.'};r.style.display='block';r.textContent=details[v]}
+
+document.getElementById('complaintForm').addEventListener('submit',function(e){
+  e.preventDefault();
+  const inputs=this.querySelectorAll('input,select,textarea');
+  const id='PRSU-DEMO-'+Math.floor(1000+Math.random()*9000);
+  adminComplaints.unshift({
+    id,
+    name:inputs[0].value||'Student',
+    location:inputs[2].value||'Campus',
+    category:inputs[3].value||'General',
+    desc:inputs[4].value||'',
+    status:'Pending'
+  });
+  renderAdminComplaints();
+  let r=document.getElementById('complaintresult');
+  r.style.display='block';
+  r.innerHTML='<b>Demo complaint created!</b><br>Tracking ID: '+id+'<br>Status: Pending (Visible in Admin Corner).';
+  this.reset();
+});
+
+document.getElementById('adminNoticeForm').addEventListener('submit',function(e){
+  e.preventDefault();
+  const title=document.getElementById('adminNoticeTitle').value.trim();
+  const desc=document.getElementById('adminNoticeDesc').value.trim();
+  const board=document.getElementById('noticeBoardCard');
+  const moreLink=document.getElementById('noticeMoreLink');
+  const item=document.createElement('div');
+  item.className='notice';
+  item.innerHTML=`<div class="date">NEW</div><div><b>${title}</b><small>${desc}</small><span class="tag" style="background:#e9f7e8;border-color:#bfe3be;color:#145334">Admin Notice</span></div>`;
+  board.insertBefore(item,moreLink);
+  const res=document.getElementById('adminNoticeResult');
+  res.style.display='block';
+  res.textContent='Notice published to the Notice Board!';
+  this.reset();
+});
+</script>
+</body></html>
