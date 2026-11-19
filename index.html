@@ -93,7 +93,6 @@ header{
 .btn:disabled{opacity:.65;cursor:not-allowed;transform:none}
 .btn.light{background:#eaf4e9;color:var(--green);box-shadow:none;border:1px solid #d5e7d6}
 .btn.light:hover{background:#dcefdc;transform:translateY(-1px)}
-.btn.outline{background:#fff;color:var(--green);border:1px solid #cfe0d1;box-shadow:none}
 
 main{max-width:1200px;margin:auto;padding:28px 22px 64px}
 
@@ -273,7 +272,7 @@ h1{font-size:clamp(30px,4.2vw,46px);font-weight:800;letter-spacing:-.8px;line-he
 .news-body a.muted{font-weight:700;color:var(--green);font-size:12px;display:inline-flex;align-items:center;gap:4px}
 .news-body a.muted:hover{text-decoration:underline}
 
-/* Interactive Panels (QR, Complaint & Admin) */
+/* Interactive Panels */
 .panel{
   display:none;
   background:#fff;
@@ -304,6 +303,13 @@ h1{font-size:clamp(30px,4.2vw,46px);font-weight:800;letter-spacing:-.8px;line-he
   border-color:var(--green2);
   background:#fff;
   box-shadow:0 0 0 3.5px rgba(35,134,83,.14);
+}
+.field input[readonly]{
+  background:#eef7ed;
+  color:#145334;
+  font-weight:600;
+  border-color:#bfe3be;
+  cursor:not-allowed;
 }
 .field.full{grid-column:1/-1}
 .field textarea{min-height:95px;resize:vertical}
@@ -371,13 +377,16 @@ footer a{color:#d8ef9a;font-weight:600;text-decoration:underline}
 </style>
 </head>
 <body>
-<div class="topbar"><span>प्रो. राजेन्द्र सिंह (रज्जू भैया) विश्वविद्यालय, प्रयागराज</span><span>Student-first • One digital campus</span></div>
+<div class="topbar">
+  <span>प्रो. राजेन्द्र सिंह (रज्जू भैया) विश्वविद्यालय, प्रयागराज</span>
+  <span id="topStudentStatus">Student-first • Samarth Verified Campus</span>
+</div>
 <header><nav class="nav">
  <a class="brand" href="#home"><img class="crest" src="https://prsuniv.ac.in/images/Allaha_logo.png" alt="Official PRSU university emblem" style="object-fit:contain;background:#fff;padding:2px"><div><b>PRSU Campus Connect</b><small>Prof. Rajendra Singh (Rajju Bhaiya) University</small></div></a>
  <div class="navlinks"><a href="#services">Services</a><a href="#notices">Notices</a><a href="#campus">Campus Map</a><a href="#news">Updates</a></div>
  <div style="display:flex;gap:8px;align-items:center">
   <button class="btn light" onclick="showPanel('admin')">🛡️ Admin Corner</button>
-  <button class="btn" onclick="showPanel('complaint')">Report a Problem</button>
+  <button class="btn" id="reportNavBtn" onclick="showPanel('complaint')">Report a Problem</button>
   <button class="mobilemenu btn light" onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})">Menu</button>
  </div>
 </nav></header>
@@ -398,7 +407,7 @@ footer a{color:#d8ef9a;font-weight:600;text-decoration:underline}
  <a class="service" href="https://www.prsuniv.ac.in/" target="_blank"><span>📝</span><b>Admissions</b><small>Notices & process ↗</small></a>
  <a class="service" href="https://mresult.prsuprayagraj.in/" target="_blank"><span>📊</span><b>Results & Exams</b><small>Official portal ↗</small></a>
  <button class="service" onclick="showPanel('qr')"><span>▦</span><b>QR Campus Scan</b><small>Try demo scanner</small></button>
- <button class="service" onclick="showPanel('complaint')"><span>🛠️</span><b>Campus Complaint</b><small>Report an issue</small></button>
+ <button class="service" onclick="showPanel('complaint')"><span>🛠️</span><b>Campus Complaint</b><small>Samarth Verified Only</small></button>
  <a class="service" href="#campus"><span>🗺️</span><b>Campus Map</b><small>Find the campus</small></a>
  <a class="service" href="https://www.prsuniv.ac.in/Prsu-Departments.aspx?DPTid=F1" target="_blank"><span>📚</span><b>Departments</b><small>Official department list ↗</small></a>
  <a class="service" href="#news"><span>📰</span><b>News & Updates</b><small>Campus highlights</small></a>
@@ -427,15 +436,66 @@ footer a{color:#d8ef9a;font-weight:600;text-decoration:underline}
  <article class="card news"><div class="news-art" style="background:#fafcfa;padding:12px"><img src="https://prsuniv.ac.in/images/Allaha_logo.png" alt="Official PRSU emblem" style="height:100px;max-width:100%;object-fit:contain"></div><div class="news-body"><small>OFFICIAL GALLERY</small><b>University photo gallery</b><p>See PRSU's own campus, infrastructure, facilities, laboratories and convocation photographs.</p><a class="muted" href="https://www.prsuniv.ac.in/Image_Gallery.aspx" target="_blank">Open official gallery ↗</a></div></article>
  <article class="card news"><div class="news-art" style="background:linear-gradient(135deg,#eaf5e8,#d5ebd3);color:#146340;font-size:18px;font-weight:800;letter-spacing:.5px">PRSU · STUDENTS</div><div class="news-body"><small>STUDENT SERVICES</small><b>Online services for students</b><p>Access official student services such as certificates, migration and marksheet-related requests.</p><a class="muted" href="https://prsuniv.ac.in/StudentsCorner2.aspx" target="_blank">Open student services ↗</a></div></article>
 </div>
+
 <section class="panel" id="qr"><h2>Campus QR scanner</h2><p class="muted">Hackathon demo: select a sample campus QR to preview how location information could appear. This prototype does not access your camera.</p><div class="qrbox"><div class="qrvisual">▦</div><b>PRSU Campus QR Demo</b><p class="muted">Choose a sample code below</p><select id="qrselect" class="field" style="padding:11px;border:1px solid #d5e3d6;border-radius:10px;width:100%;margin:10px 0 12px;background:#fff"><option value="">Select a location</option><option>Computer Lab</option><option>Central Library</option><option>Administrative Block</option><option>Department Office</option></select><button class="btn" style="width:100%" onclick="scanDemo()">Open location details</button><div class="result" id="qrresult"></div></div></section>
-<section class="panel" id="complaint"><h2>Report a campus issue</h2><p class="muted">Demonstration form only. Submissions are shown on this page and are not sent to the university.</p><form id="complaintForm" class="formgrid">
- <div class="field"><label>Your name</label><input required placeholder="Enter your name"></div>
- <div class="field"><label>Student email (optional)</label><input type="email" placeholder="name@example.com"></div>
- <div class="field"><label>Issue location</label><select required><option value="">Select location</option><option>Classroom</option><option>Computer Lab</option><option>Library</option><option>Washroom</option><option>Campus grounds</option><option>Other</option></select></div>
- <div class="field"><label>Issue category</label><select required><option value="">Select category</option><option>Electricity</option><option>Internet / Wi-Fi</option><option>Water / Plumbing</option><option>Equipment</option><option>Cleanliness</option><option>Other</option></select></div>
- <div class="field full"><label>Describe the issue</label><textarea required placeholder="Tell us what needs attention..."></textarea></div>
- <div class="field full"><button class="btn" type="submit">Submit demo complaint</button></div>
- </form><div class="result" id="complaintresult"></div></section>
+
+<!-- Gated Report Issue Panel (Samarth Student Verification Inside) -->
+<section class="panel" id="complaint">
+  <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:12px">
+    <div>
+      <h2>Report a campus issue</h2>
+      <p class="muted">केवल PRSU विश्वविद्यालय के छात्र ही शिकायत दर्ज कर सकते हैं (बाहरी व्यक्तियों के लिए बंद)।</p>
+    </div>
+    <div style="display:flex;align-items:center;gap:8px">
+      <span id="studentGateBadge" class="tag" style="background:#fef5dc;border-color:#f5e1a4;color:#855b14;font-size:11px;margin:0">🔒 Samarth Verification Required</span>
+      <button type="button" id="studentLogoutBtn" class="btn light" style="display:none;padding:6px 12px;font-size:11.5px" onclick="logoutStudent()">Change Student</button>
+    </div>
+  </div>
+
+  <!-- Step 1: Samarth Student Verification Gate (Shown First) -->
+  <div id="studentVerificationGate" style="max-width:460px;margin:16px auto;padding:24px;border:1px solid #cce0ce;border-radius:18px;background:#fafcfa">
+    <div style="display:inline-block;background:#e6f2ff;color:#0056b3;padding:4px 10px;border-radius:6px;font-size:11px;font-weight:700;margin-bottom:10px">🎓 Step 1: PRSU Samarth Student Check</div>
+    <b style="display:block;font-size:16px;color:#10281d;margin-bottom:4px">Verify Your University Enrollment</b>
+    <p class="muted" style="margin:0 0 16px">शिकायत फॉर्म खोलने के लिए अपना Samarth एनरोलमेंट नंबर और जन्मतिथि दर्ज करें।</p>
+
+    <form id="samarthGateForm">
+      <div class="field" style="margin-bottom:12px">
+        <label>Samarth Enrollment Number</label>
+        <input type="text" id="gateEnrollInput" required placeholder="e.g., PRSU25000706">
+      </div>
+      <div class="field" style="margin-bottom:16px">
+        <label>Date of Birth (जन्मतिथि)</label>
+        <input type="date" id="gateDobInput" required>
+      </div>
+      <button type="submit" class="btn" style="width:100%">Verify via Samarth & Unlock Form →</button>
+    </form>
+
+    <div class="result" id="gateErrorMsg"></div>
+
+    <div style="margin-top:16px;padding:10px 12px;background:#f0f7f1;border:1px dashed #9fc5a6;border-radius:10px;font-size:11.5px;color:#3c4e44">
+      <strong>Demo PRSU Student Records:</strong><br>
+      • <code>PRSU25000706</code> | DOB: <code>2005-01-01</code> (Deepanshu Tiwari)<br>
+      • <code>PRSU25000707</code> | DOB: <code>2004-05-15</code> (Aarav Sharma)
+    </div>
+  </div>
+
+  <!-- Step 2: Actual Complaint Form (Hidden Until Samarth Verifies Student) -->
+  <div id="verifiedComplaintBox" style="display:none">
+    <div style="padding:11px 14px;background:#e9f7e8;border:1px solid #bfe3be;border-radius:12px;color:#145334;font-size:12.5px;margin-bottom:14px">
+      ✅ <b>Samarth Verified:</b> स्वागत है <strong id="verifiedStudentBannerName"></strong> — अब आप अपनी कैंपस समस्या दर्ज कर सकते हैं।
+    </div>
+
+    <form id="complaintForm" class="formgrid">
+      <div class="field"><label>Verified Student Name & ID</label><input id="complaintNameInput" readonly required></div>
+      <div class="field"><label>Student email (optional)</label><input type="email" placeholder="name@example.com"></div>
+      <div class="field"><label>Issue location</label><select required><option value="">Select location</option><option>Classroom</option><option>Computer Lab</option><option>Library</option><option>Washroom</option><option>Campus grounds</option><option>Other</option></select></div>
+      <div class="field"><label>Issue category</label><select required><option value="">Select category</option><option>Electricity</option><option>Internet / Wi-Fi</option><option>Water / Plumbing</option><option>Equipment</option><option>Cleanliness</option><option>Other</option></select></div>
+      <div class="field full"><label>Describe the issue</label><textarea required placeholder="Tell us what needs attention..."></textarea></div>
+      <div class="field full"><button class="btn" type="submit">Submit Verified Complaint</button></div>
+    </form>
+    <div class="result" id="complaintresult"></div>
+  </div>
+</section>
 
 <!-- Admin Corner Panel (Firebase Authenticated) -->
 <section class="panel" id="admin">
@@ -495,11 +555,77 @@ footer a{color:#d8ef9a;font-weight:600;text-decoration:underline}
 </main>
 <footer><b>PRSU Campus Connect</b><p>Independent student prototype using official PRSU public information and imagery · Not an official university portal</p><a href="https://www.prsuniv.ac.in/" target="_blank">Official PRSU website</a></footer>
 
-<!-- Standard UI Script -->
+<!-- Standard UI & Gated Samarth Verification Script -->
 <script>
+// Dummy PRSU Samarth Student Database
+const samarthDatabase = [
+  { enrollmentNo: "PRSU25000706", dob: "2005-01-01", name: "Deepanshu Tiwari", course: "Computer Science" },
+  { enrollmentNo: "PRSU25000707", dob: "2004-05-15", name: "Aarav Sharma", course: "B.Sc CS" },
+  { enrollmentNo: "PRSU25000708", dob: "2003-11-20", name: "Priya Verma", course: "MCA" }
+];
+
+let verifiedStudent = null;
+
+// Handle Samarth Verification inside Report Issue
+document.getElementById('samarthGateForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const enteredNo = document.getElementById('gateEnrollInput').value.trim().toUpperCase();
+  const enteredDob = document.getElementById('gateDobInput').value;
+  const errBox = document.getElementById('gateErrorMsg');
+
+  const student = samarthDatabase.find(
+    s => s.enrollmentNo === enteredNo && s.dob === enteredDob
+  );
+
+  if (student) {
+    verifiedStudent = student;
+    errBox.style.display = 'none';
+
+    // Hide Gate & Unlock Complaint Form
+    document.getElementById('studentVerificationGate').style.display = 'none';
+    document.getElementById('verifiedComplaintBox').style.display = 'block';
+    document.getElementById('studentLogoutBtn').style.display = 'inline-flex';
+
+    // Update Badges & Auto-fill Student Identity
+    const badge = document.getElementById('studentGateBadge');
+    badge.style.background = '#e9f7e8';
+    badge.style.borderColor = '#bfe3be';
+    badge.style.color = '#145334';
+    badge.textContent = `✓ Verified: ${student.enrollmentNo}`;
+
+    document.getElementById('verifiedStudentBannerName').textContent = `${student.name} (${student.enrollmentNo} • ${student.course})`;
+    document.getElementById('complaintNameInput').value = `${student.name} (${student.enrollmentNo})`;
+    document.getElementById('topStudentStatus').textContent = `✓ Verified PRSU Student: ${student.name} (${student.enrollmentNo})`;
+  } else {
+    errBox.style.display = 'block';
+    errBox.style.background = '#fee2e2';
+    errBox.style.borderColor = '#fca5a5';
+    errBox.style.color = '#991b1b';
+    errBox.innerHTML = `❌ <b>एक्सेस अस्वीकृत!</b> आपका रिकॉर्ड PRSU Samarth डेटाबेस में नहीं मिला। बाहरी व्यक्ति शिकायत दर्ज नहीं कर सकते।`;
+  }
+});
+
+// Reset Gate to switch/logout student
+function logoutStudent() {
+  verifiedStudent = null;
+  document.getElementById('samarthGateForm').reset();
+  document.getElementById('complaintForm').reset();
+  document.getElementById('complaintresult').style.display = 'none';
+  document.getElementById('verifiedComplaintBox').style.display = 'none';
+  document.getElementById('studentVerificationGate').style.display = 'block';
+  document.getElementById('studentLogoutBtn').style.display = 'none';
+
+  const badge = document.getElementById('studentGateBadge');
+  badge.style.background = '#fef5dc';
+  badge.style.borderColor = '#f5e1a4';
+  badge.style.color = '#855b14';
+  badge.textContent = '🔒 Samarth Verification Required';
+  document.getElementById('topStudentStatus').textContent = 'Student-first • Samarth Verified Campus';
+}
+
 const adminComplaints=[
-  {id:'PRSU-DEMO-4821',name:'Aarav Sharma',location:'Computer Lab',category:'Internet / Wi-Fi',desc:'Wi-Fi router disconnecting frequently in Lab 2.',status:'Pending'},
-  {id:'PRSU-DEMO-3194',name:'Priya Verma',location:'Library',category:'Electricity',desc:'Two reading lamps not working in the quiet hall.',status:'Pending'}
+  {id:'PRSU-DEMO-4821',name:'Aarav Sharma (PRSU25000707)',location:'Computer Lab',category:'Internet / Wi-Fi',desc:'Wi-Fi router disconnecting frequently in Lab 2.',status:'Pending'},
+  {id:'PRSU-DEMO-3194',name:'Priya Verma (PRSU25000708)',location:'Library',category:'Electricity',desc:'Two reading lamps not working in the quiet hall.',status:'Pending'}
 ];
 
 function renderAdminComplaints(){
@@ -552,11 +678,15 @@ function scanDemo(){
 
 document.getElementById('complaintForm').addEventListener('submit',function(e){
   e.preventDefault();
+  if(!verifiedStudent){
+    alert('Please verify your PRSU Samarth enrollment first.');
+    return;
+  }
   const inputs=this.querySelectorAll('input,select,textarea');
   const id='PRSU-DEMO-'+Math.floor(1000+Math.random()*9000);
   adminComplaints.unshift({
     id,
-    name:inputs[0].value||'Student',
+    name:`${verifiedStudent.name} (${verifiedStudent.enrollmentNo})`,
     location:inputs[2].value||'Campus',
     category:inputs[3].value||'General',
     desc:inputs[4].value||'',
@@ -565,8 +695,9 @@ document.getElementById('complaintForm').addEventListener('submit',function(e){
   renderAdminComplaints();
   let r=document.getElementById('complaintresult');
   r.style.display='block';
-  r.innerHTML='<b>Demo complaint created!</b><br>Tracking ID: '+id+'<br>Status: Pending (Visible in Admin Corner).';
+  r.innerHTML='<b>Verified complaint submitted!</b><br>Tracking ID: '+id+'<br>Submitted by: '+verifiedStudent.name+' ('+verifiedStudent.enrollmentNo+')';
   this.reset();
+  document.getElementById('complaintNameInput').value = `${verifiedStudent.name} (${verifiedStudent.enrollmentNo})`;
 });
 
 document.getElementById('adminNoticeForm').addEventListener('submit',function(e){
@@ -615,7 +746,6 @@ document.getElementById('adminNoticeForm').addEventListener('submit',function(e)
   const logoutBtn = document.getElementById('adminLogoutBtn');
   const userBadge = document.getElementById('adminUserBadge');
 
-  // Admin Login Submit
   loginBox.addEventListener('submit', async (e) => {
     e.preventDefault();
     const email = document.getElementById('adminEmailInput').value.trim();
@@ -640,12 +770,10 @@ document.getElementById('adminNoticeForm').addEventListener('submit',function(e)
     }
   });
 
-  // Admin Logout
   window.logoutAdmin = async () => {
     await signOut(auth);
   };
 
-  // Real-time Auth State Listener
   onAuthStateChanged(auth, (user) => {
     if (user) {
       loginBox.style.display = 'none';
